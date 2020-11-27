@@ -1,4 +1,4 @@
-# sample-app
+# address-admin
 
 ## Project setup
 ```
