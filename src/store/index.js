@@ -29,6 +29,11 @@ export default new Vuex.Store({
     addAddress (state, {id, address}) {
       address.id = id
       state.addresses.push(address)
+    },
+    updateAddress( state, { id, address }) {
+      const index = state.addresses.findIndex(address => address.id = id)
+
+      state.addresses[index] = address
     }
   },
   actions: {
@@ -59,6 +64,13 @@ export default new Vuex.Store({
         firebase.firestore().collection(`users/${getters.uid}/addresses`)
         .add(address).then(doc => {
           commit('addAddress', { id: doc.id, address })
+        })
+      }
+    },
+    updateAddress ({getters, commit }, { id, address }) {
+      if (getters.uid) {
+        firebase.firestore().collection(`users/${getters.uid}/addresses`).doc(id).update(address).then(() =>{
+          commit('updateAddress', {id, address})
         })
       }
     }
