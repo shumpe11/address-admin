@@ -31,7 +31,7 @@ export default {
   },
   created(){
     firebase.auth().onAuthStateChanged(user => {
-      if(user) {
+      if (user) {
         this.setLoginUser(user)
         this.fetchAddresses()
         if (this.$router.currentRoute.name === 'home') this.$router.push({ name: 'addresses' })
@@ -41,6 +41,7 @@ export default {
       }
     })
   },
+
   data () {
     return {
       drawer: false
